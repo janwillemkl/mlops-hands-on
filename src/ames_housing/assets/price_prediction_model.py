@@ -16,7 +16,6 @@ from ames_housing.constants import (
     RANDOM_STATE,
     TARGET,
 )
-from ames_housing.resources.training_config import ModelTrainingConfig
 
 
 @asset()
@@ -72,7 +71,9 @@ def price_prediction_model(
             ("preprocessor", preprocessing_pipeline),
             (
                 "estimator",
-                GradientBoostingRegressor(),
+                GradientBoostingRegressor(
+                    random_state=RANDOM_STATE,
+                ),
             ),
         ]
     )
